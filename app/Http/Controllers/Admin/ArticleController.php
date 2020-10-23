@@ -33,7 +33,7 @@ class ArticleController extends AdminController
     public function readPrepare(){
         $this->curdService->findAfter(function(){
             // 关联文章内容
-            $this->curdService->responseData->article_content;
+            $this->curdService->findData->article_content;
         });
     }
 
