@@ -41,7 +41,7 @@ $app->withFacades(true, [
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
+    App\Common\Exceptions\CustomHandler::class
 );
 
 $app->singleton(
