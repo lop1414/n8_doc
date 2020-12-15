@@ -26,9 +26,9 @@ class ArticleController extends FrontController
      * @param Request $request
      * @return mixed
      * @throws \App\Common\Tools\CustomException
-     * 列表
+     * 列表 (无分页)
      */
-    public function select(Request $request){
+    public function get(Request $request){
         $data = $request->all();
 
         $this->validRule($data, [

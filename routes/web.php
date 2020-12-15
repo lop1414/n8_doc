@@ -45,7 +45,7 @@ $router->group([
 ], function () use ($router) {
     $router->group(['prefix' => 'article'], function () use ($router) {
         // 文章
-        $router->post('select', 'Front\ArticleController@select');
+        $router->post('get', 'Front\ArticleController@get');
         $router->post('tree', 'Front\ArticleController@tree');
         $router->post('read', 'Front\ArticleController@read');
     });
