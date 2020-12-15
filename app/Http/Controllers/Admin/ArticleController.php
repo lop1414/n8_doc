@@ -178,4 +178,20 @@ class ArticleController extends AdminController
             throw new \Exception($e->getCode(), $e->getMessage());
         }
     }
+
+    /**
+     * 树预处理
+     */
+    public function treePrepare(){
+        $this->curdService->addField('system_alias')
+            ->addValidRule('required')
+            ->addValidEnum(SystemAliasEnum::class);
+
+        $this->curdService->treeQueryBefore(function(){
+            $this->curdService->customBuilder(function($builder){
+                $systemAlias = $this->curdService->requestData['system_alias'];
+                $builder->where('system_alias', $systemAlias);
+            });
+        });
+    }
 }
