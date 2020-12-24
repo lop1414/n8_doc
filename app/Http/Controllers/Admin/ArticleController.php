@@ -17,6 +17,8 @@ class ArticleController extends AdminController
 {
     use BuildTree;
 
+    public $defaultOrderBy = 'order';
+
     /**
      * constructor.
      */
