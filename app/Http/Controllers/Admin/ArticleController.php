@@ -30,6 +30,17 @@ class ArticleController extends AdminController
     }
 
     /**
+     * 列表预处理
+     */
+    public function selectPrepare(){
+        $this->curdService->selectQueryBefore(function(){
+            $this->curdService->customBuilder(function($builder){
+                $builder->orderBy('updated_at', 'desc');
+            });
+        });
+    }
+
+    /**
      * 详情预处理
      */
     public function readPrepare(){
