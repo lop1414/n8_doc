@@ -75,6 +75,10 @@ class ArticleController extends FrontController
             $builder->where('status', $data['status']);
         }
 
+        if(!empty($data['keyword'])){
+            $builder->where('name', 'LIKE', "%{$data['keyword']}%");
+        }
+
         $articles = $builder->get();
 
         return $articles;
