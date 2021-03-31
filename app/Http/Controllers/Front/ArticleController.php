@@ -73,6 +73,8 @@ class ArticleController extends FrontController
         if(!empty($data['status'])){
             Functions::hasEnum(StatusEnum::class, $data['status']);
             $builder->where('status', $data['status']);
+        }else{
+            $builder->where('status', StatusEnum::ENABLE);
         }
 
         if(!empty($data['keyword'])){
