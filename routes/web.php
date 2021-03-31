@@ -32,6 +32,7 @@ $router->group([
         $router->post('enable', 'Admin\ArticleController@enable');
         $router->post('disable', 'Admin\ArticleController@disable');
         $router->post('tree', 'Admin\ArticleController@tree');
+        $router->post('update_order', 'Admin\ArticleController@updateOrder');
     });
 });
 

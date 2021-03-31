@@ -207,4 +207,37 @@ class ArticleController extends AdminController
             });
         });
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws CustomException
+     * 修改排序
+     */
+    public function updateOrder(Request $request){
+        $this->validRule($request->post(), [
+            'tree' => 'required',
+        ]);
+
+        $tree = $request->post('tree');
+        $array = array_reverse($this->treeToArray($tree));
+
+        $order = 100;
+        foreach($array as $k => $v){
+            $id = $v['id'] ?? 0;
+
+            $article = $this->model->find($id);
+            if(empty($article)){
+                continue;
+            }
+
+            $article->order = $order;
+            $article->parent_id = $v['parent_id'];
+            $article->save();
+
+            $order += 5;
+        }
+
+        return $this->success();
+    }
 }
