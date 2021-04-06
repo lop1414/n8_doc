@@ -60,15 +60,21 @@ class ArticleController extends FrontController
      * 获取文章
      */
     private function getArticles($data){
-        $this->validRule($data, [
-            'system_alias' => 'required',
-        ]);
-
-        Functions::hasEnum(SystemAliasEnum::class, $data['system_alias']);
-
         $articleModel = new ArticleModel();
-        $builder = $articleModel->where('system_alias', $data['system_alias'])
-            ->orderBy('order', 'desc');
+
+        // 系统别名
+        if(!empty($data['system_alias'])){
+            Functions::hasEnum(SystemAliasEnum::class, $data['system_alias']);
+            $articleModel = $articleModel->where('system_alias', $data['system_alias']);
+        }
+
+        // 排序
+        if(!empty($data['order_by'])){
+            $orderType = $data['order_type'] ?? 'desc';
+            $builder = $articleModel->orderBy($data['order_by'], $orderType);
+        }else{
+            $builder = $articleModel->orderBy('order', 'desc');
+        }
 
         if(!empty($data['status'])){
             Functions::hasEnum(StatusEnum::class, $data['status']);
