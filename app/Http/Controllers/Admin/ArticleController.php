@@ -115,11 +115,11 @@ class ArticleController extends AdminController
         }catch(CustomException $e){
             // 事务回滚
             DB::rollBack();
-            throw new CustomException($e->getErrorInfo(true));
+            throw $e;
         }catch(\Exception $e){
             // 事务回滚
             DB::rollBack();
-            throw new \Exception($e->getCode(), $e->getMessage());
+            throw $e;
         }
     }
 
@@ -184,11 +184,11 @@ class ArticleController extends AdminController
         }catch(CustomException $e){
             // 事务回滚
             DB::rollBack();
-            throw new CustomException($e->getErrorInfo(true));
+            throw $e;
         }catch(\Exception $e){
             // 事务回滚
             DB::rollBack();
-            throw new \Exception($e->getCode(), $e->getMessage());
+            throw $e;
         }
     }
 
