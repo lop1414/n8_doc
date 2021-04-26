@@ -145,6 +145,13 @@ class ArticleController extends AdminController
             $this->curdService->addField('parent_id')->addValidRule('integer');
             $this->curdService->addField('content')->addValidRule('required');
 
+            if($requestData['parent_id'] == $requestData['id']){
+                throw new CustomException([
+                    'code' => 'PARENT_ID_IS_SAME_WITH_ID',
+                    'message' => '父级不能为自己',
+                ]);
+            }
+
             $ret = $this->curdService->update();
             if(!$ret){
                 throw new CustomException([
